@@ -41,8 +41,8 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from google.colab import userdata
 import os
 ```
-### Step 3: Configure API Key and Model
-Use the Google API Key to authenticate and configure the ChatGoogleGenerativeAI model,Google Gemini Flash 2.0,to answer user questions:
+### Step 3: Configure API Key and Gemini Flash Model 2.0
+Use the Google API Key to authenticate and configure the ChatGoogleGenerativeAI model to answer user questions:
 ```python
 api_key = userdata.get('GOOGLE_API_KEY')
 model = ChatGoogleGenerativeAI(api_key=api_key, model="gemini-2.0-flash-exp")
@@ -51,21 +51,18 @@ model = ChatGoogleGenerativeAI(api_key=api_key, model="gemini-2.0-flash-exp")
 Define a prompt template to restrict responses to math-related questions:
 ```python
 from langchain.prompts import PromptTemplate
-```
-### Step 5: Create a prompt template
-```python
 prompt_template = PromptTemplate(
     input_variables=["question"],
     template="I want you to answer only math related question and don't respond if question is from other subject:\n\n{question}"
 )
 ```
-### Step 6: Create the LLM Chain
+### Step 5: Build the LangChain Pipeline
 Combine the model and the prompt template into an LLM chain:
 ```python
 from langchain.chains import LLMChain
 chain = LLMChain(llm=model, prompt=prompt_template)
 ```
-### Step 7: Run the Math Solver Agent Chain
+### Step 6: Run the Math Solver Agent 
 Pass sample questions to chain to test its functionality:
 #### Example 1: Math Question
 ```python
